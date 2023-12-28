@@ -9,9 +9,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-  function initializeApp(data){
-    var userid = data.context.userId;
-  }
+  var liffID = '2002173081-wgDRr6xy'
+  liff.init({
+    liffid:liffID
+  }).then(()=>{
+    var isInClient = liff.isInClient();
+    console.log('isInClient', isInClient);
+    $('#isInClient').val(isInClient);
+  }).catch((err)=>{
+    console.log("初始化失敗")
+  });
+
+  // function initializeApp(data){
+  //   var userid = data.context.userId;
+  // }
   
   function reserve(name, tel, datepicker,time,sitem) {
         if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
@@ -30,16 +41,18 @@
               text: msg
             }
         ])
-            .then(() => {
-                liff.closeWindow();  //關閉視窗
-            });
+          .then(function () {
+              window.alert("預定成功！");
+              liff.closeWindow();
+              }).catch(function (error) {
+                    window.alert("Error sending message: " + error);
+              });
     }
 
     $(document).ready(function () {
-        liff.init(function (data) {  //初始化LIFF
-            initializeApp(data);
+                initializeLiff(2002173081-wgDRr6xy);
         });
-        $('#btn_reserve').click(function (e) {  //按下確定鈕
+        $('#btn_reserve').click(function () {  //按下確定鈕
             reserve($('#name').val(), $('#tel').val(), $('#mail').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
         });
     });
