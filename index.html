@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
+  
   var liffID = '2002173081-wgDRr6xy'
   liff.init({
     liffid:liffID
@@ -33,9 +34,6 @@
         var msg = "###";  //回傳訊息字串
         msg = msg + name + "/";
         msg = msg + tel + "/";
-        msg = msg + datepicker + "/";
-        msg = msg + time + "/";
-        msg = msg + sitem + "/";
         liff.sendMessages([  //推播訊息
             { type: 'text',
               text: msg
