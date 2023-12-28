@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-  
-  var liffID = '2002173081-wgDRr6xy'
-  liff.init({
-    liffid:liffID
+
+ var myLiffId="2002173081-wgDRr6xy"
+
+  function initializeLiff(myLiffId){
+    liff.init({
+    liffid:myLiffId
   }).then(()=>{
     var isInClient = liff.isInClient();
     console.log('isInClient', isInClient);
@@ -20,6 +22,8 @@
   }).catch((err)=>{
     console.log("初始化失敗")
   });
+  }
+
 
   // function initializeApp(data){
   //   var userid = data.context.userId;
@@ -75,9 +79,9 @@
         <input id="name" type="text" name="user_name"/>
         <label for="tel">聯絡電話:</label>
         <input id="tel" type="tel" name="user_iphone"/>
-        <label>預約日期:</label>
+        <label for="data">預約日期:</label>
           <input type="date" id="datepicker" value="" />  
-        <label>預約時間:</label>
+        <label for="time">預約時間:</label>
         <select id="time" type="time" value="time" name="user_time">
           <option value="8:30">8:30</option>
           <option value="9:00">9:00</option>
