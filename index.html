@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-tw" >
+<head>
+  <meta charset="UTF-8">
+  <title>預約表單</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  function initializeApp(data){
+    var userid = data.context.userId;
+  }
+  
+  function reserve(name, tel, datepicker,time,sitem) {
+        if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
+            alert('這些欄位都是要填寫！');
+            return;
+        }
+
+        var msg = "###";  //回傳訊息字串
+        msg = msg + name + "/";
+        msg = msg + tel + "/";
+        msg = msg + datepicker + "/";
+        msg = msg + time + "/";
+        msg = msg + sitem + "/";
+        liff.sendMessages([  //推播訊息
+            { type: 'text',
+              text: msg
+            }
+        ])
+            .then(() => {
+                liff.closeWindow();  //關閉視窗
+            });
+    }
+
+    $(document).ready(function () {
+        liff.init(function (data) {  //初始化LIFF
+            initializeApp(data);
+        });
+        $('#btn_reserve').click(function (e) {  //按下確定鈕
+            reserve($('#name').val(), $('#tel').val(), $('#mail').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
+        });
+    });
+</script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>預約表單</title>
+  <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0"/>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="css/main.css"/>
+</head>
+<div class="row">
+  <div class="col-md-12">
+    <form action="" method="">
+      <h1> 預約表單 </h1>
+      <fieldset>
+        <legend><span class="number">1</span> 基本資料</legend>
+        <label for="name">姓名:</label>
+        <input id="name" type="text" name="user_name"/>
+        <label for="tel">聯絡電話:</label>
+        <input id="tel" type="tel" name="user_iphone"/>
+        <label>預約日期:</label>
+          <input type="date" id="datepicker" value="" />  
+        <label>預約時間:</label>
+        <select id="time" type="time" value="time" name="user_time">
+          <option value="8:30">8:30</option>
+          <option value="9:00">9:00</option>
+          <option value="9:30">9:30</option>
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+          <option value="11:30">11:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+          <option value="15:00">15:00</option>
+          <option value="15:30">15:30</option>
+          <option value="16:00">16:00</option>
+          <option value="16:30">16:30</option>
+        </select>
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend><span class="number">2</span> 預約項目</legend>
+        <br>
+        <label for="sitem">預約項目</label>
+        <select id="sitem" name="sitem">
+          <optgroup label="產品諮詢">
+            <option value="門市預約">門市預約</option>
+            <option value="專人到府服務">專人到府服務</option>
+          </optgroup>
+          <optgroup label="維修服務">
+            <option value="機台漏水">機台漏水</option>
+            <option value="故障燈亮起">故障燈亮起</option>
+            <option value="其他">其他</option>
+          </optgroup>
+          <optgroup label="保養服務">
+            <option value="濾心保養">濾心保養</option>
+            <option value="飲水機清潔保養">飲水機清潔保養</option>
+          </optgroup>
+        </select>
+        <br>
+        <br>
+        <label for="bio">備註</label>
+        <textarea id="bio" name="user_bio"></textarea>
+      </fieldset>
+      <br>
+      <button type="submit"  id="btn_reserve">確認</button>
+    </form>
+  </div>
+</div>
+</html>
