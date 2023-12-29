@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="zh-tw" >
 <head>
   <meta charset="UTF-8">
   <title>預約表單</title>
@@ -10,6 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<!-- partial:index.partial.html -->
 <div class="row">
   <div class="col-md-12">
     <form autocomplete="on">
@@ -21,12 +22,24 @@
         <label for="tel">聯絡電話:</label>
         <input id="tel" type="tel" name="tel"/>
         <label for="datepicker">預約日期:</label>
-        <input type="date" id="datepicker" value="" name="datepicker"/>  
+          <input type="date" id="datepicker" value="" name="datepicker"/>  
         <label for="time">預約時間:</label>
         <select id="time" type="time" value="" name="time">
           <option value="8:30">8:30</option>
           <option value="9:00">9:00</option>
-          <!-- 其他选项... -->
+          <option value="9:30">9:30</option>
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+          <option value="11:30">11:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+          <option value="15:00">15:00</option>
+          <option value="15:30">15:30</option>
+          <option value="16:00">16:00</option>
+          <option value="16:30">16:30</option>
         </select>
       </fieldset>
       <br>
@@ -35,7 +48,19 @@
         <br>
         <label for="sitem">預約項目</label>
         <select id="sitem" name="sitem">
-          <!-- 预约项选项... -->
+          <optgroup label="產品諮詢">
+            <option value="門市預約">門市預約</option>
+            <option value="專人到府服務">專人到府服務</option>
+          </optgroup>
+          <optgroup label="維修服務">
+            <option value="機台漏水">機台漏水</option>
+            <option value="故障燈亮起">故障燈亮起</option>
+            <option value="其他">其他</option>
+          </optgroup>
+          <optgroup label="保養服務">
+            <option value="濾心保養">濾心保養</option>
+            <option value="飲水機清潔保養">飲水機清潔保養</option>
+          </optgroup>
         </select>
         <br>
         <br>
@@ -49,48 +74,52 @@
 </div>
 <script>
 var myLiffId = "2002173081-wgDRr6xy";
+      function initializeLiff(myLiffId) {
+            liff
+                .init({
+                    liffId:myLiffId
+                })
+                .then(() => {
+                  　var isInClient = liff.isInClient();
+            　      console.log('isInClient', isInClient);
+            　      $('#isInClient').val(isInClient);
+                })
+                .catch((err) => {
+                  console.log('初始化失敗')
+                });
+        }
 
-function initializeLiff(myLiffId) {
-  liff.init({
-    liffId: myLiffId
-  }).then(() => {
-    var isInClient = liff.isInClient();
-    console.log('isInClient', isInClient);
-    $('#isInClient').val(isInClient);
-  }).catch((err) => {
-    console.log('初始化失敗', err);
-  });
-}
-
-function reserve(name, tel, datepicker, time, sitem) {
-  if (name == '' || tel == '' || datepicker == '' || time == '' || sitem == '') {
-    alert('這些欄位都是要填寫！');
-    return;
-  }
-
-  var msg = "###";
-  msg = msg + name + "/";
-  msg = msg + tel + "/";
-  liff.sendMessages([
-    {
-      type: 'text',
-      text: msg
-    }
-  ]).then(function () {
-    window.alert("預定成功！");
-    liff.closeWindow();
-  }).catch(function (error) {
-    window.alert("Error sending message: " + error);
-  });
-}
-
-$(document).ready(function () {
-  initializeLiff("2002173081-wgDRr6xy");
-
-  $('#btn_reserve').click(function (e) {
-    reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(), $('#bio').val());
-  });
+            
+   
+   function reserve(name, tel, datepicker,time,sitem) {
+         if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
+             alert('這些欄位都是要填寫！');
+             return;
+         }
+ 
+         var msg = "###";  //回傳訊息字串
+         msg = msg + name + "/";
+         msg = msg + tel + "/";
+         liff.sendMessages([  //推播訊息
+             { type: 'text',
+               text: msg
+             }
+         ])
+           .then(function () {
+               window.alert("預定成功！");
+               liff.closeWindow();
+               }).catch(function (error) {
+                     window.alert("Error sending message: " + error);
+               });
+     }
+ 
+     $(document).ready(function () {
+          initializeLiff("2002173081-wgDRr6xy");
+        $('#btn_reserve').click(function (e) {  //按下確定鈕
+            reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
+     })
+      
 });
-</script>
+ </script>
 </body>
 </html>
