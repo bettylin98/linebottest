@@ -74,12 +74,11 @@
 </div>
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 <script>
-
-  var liffID = '2002173081-wgDRr6xy';
-      function initializeLiff(liffID) {
+var myLiffId = "2002173081-wgDRr6xy";
+      function initializeLiff(myLiffId) {
             liff
                 .init({
-                    liffId: liffID
+                    liffId:myLiffId
                 })
                 .then(() => {
                   　var isInClient = liff.isInClient();
