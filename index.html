@@ -75,13 +75,13 @@
       <fieldset>
         <legend><span class="number">1</span> 基本資料</legend>
         <label for="name">姓名:</label>
-        <input id="name" type="text" name="user_name"/>
+        <input id="name" type="text" name="name"/>
         <label for="tel">聯絡電話:</label>
-        <input id="tel" type="tel" name="user_iphone"/>
-        <label for="data">預約日期:</label>
-          <input type="date" id="datepicker" value="" />  
+        <input id="tel" type="tel" name="tel"/>
+        <label for="datepicker">預約日期:</label>
+          <input type="date" id="datepicker" value="" name="datepicker"/>  
         <label for="time">預約時間:</label>
-        <select id="time" type="time" value="time" name="user_time">
+        <select id="time" type="time" value="" name="time">
           <option value="8:30">8:30</option>
           <option value="9:00">9:00</option>
           <option value="9:30">9:30</option>
@@ -122,7 +122,7 @@
         <br>
         <br>
         <label for="bio">備註</label>
-        <textarea id="bio" name="user_bio"></textarea>
+        <textarea id="bio" name="bio"></textarea>
       </fieldset>
       <br>
       <button type="submit"  id="btn_reserve">確認</button>
