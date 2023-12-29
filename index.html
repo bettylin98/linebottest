@@ -75,23 +75,20 @@
 <script>
 var myLiffId = "2002173081-wgDRr6xy";
       function initializeLiff(myLiffId) {
-            liff
-                .init({
+            liff.init({
                     liffId:myLiffId
-                })
-                .then(() => {
+                }).then(() => {
                   　var isInClient = liff.isInClient();
             　      console.log('isInClient', isInClient);
             　      $('#isInClient').val(isInClient);
-                })
-                .catch((err) => {
+                }).catch((err) => {
                   console.log('初始化失敗')
                 });
         }
 
             
    
-   function reserve(name, tel, datepicker,time,sitem) {
+   function reserve(name, tel, datepicker,time,sitem,bio) {
          if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
              alert('這些欄位都是要填寫！');
              return;
