@@ -78,6 +78,18 @@ function initializeApp(data) {
         var userid = data.context.userId;  //取得LINE Id
     }
 
+var liffID = '2002173081-wgDRr6xy';
+
+liff.init({
+  liffId: liffID
+}).then(() => {
+　var isInClient = liff.isInClient();
+　console.log('isInClient', isInClient);
+　$('#isInClient').val(isInClient);
+}).catch((err) => {
+　console.log('初始化失敗')
+});
+
    
    function reserve(name, tel, datepicker,time,sitem) {
          if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
@@ -102,9 +114,7 @@ function initializeApp(data) {
      }
  
      $(document).ready(function () {
-      liff.init(function (data) {  //初始化LIFF
-            initializeApp(data);
-        });
+          initializeLiff(2002173081-wgDRr6xy);
         $('#btn_reserve').click(function (e) {  //按下確定鈕
             reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
      })
