@@ -74,48 +74,47 @@
 </div>
 <script>
 const myLiffId = '2002173081-wgDRr6xy';
-      function initializeLiff() {
-            liff.init({
-                    liffId:myLiffId
-                }).then(() => {
-                  var isInClient = liff.isInClient();
-                  console.log('isInClient', isInClient);
-                  $('#isInClient').val(isInClient);
-                }).catch((err) => {
-                  console.log('初始化失敗')
-                });
-        }
 
-            
-   
-   function reserve(name, tel, datepicker,time,sitem,bio) {
-         if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
-             alert('這些欄位都是要填寫！');
-             return;
-         }
- 
-         var msg = "###";  //回傳訊息字串
-         msg = msg + name + "/";
-         msg = msg + tel + "/";
-         liff.sendMessages([  //推播訊息
-             { type: 'text',
-               text: msg
-             }
-         ])
-           .then(function () {
-               window.alert("預定成功！");
-               liff.closeWindow();
-               }).catch(function (error) {
-                     window.alert("Error sending message: " + error);
-               });
-     }
- 
-     $(document).ready(function () {
-            initializeLiff();
-        $('#btn_reserve').click(function (e) {  //按下確定鈕
-            reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
-     })
-      
+function initializeLiff() {
+    liff.init({
+        liffId: myLiffId
+    }).then(() => {
+        var isInClient = liff.isInClient();
+        console.log('isInClient', isInClient);
+        $('#isInClient').val(isInClient);  // 假设你有一个具有 id 'isInClient' 的元素
+    }).catch((err) => {
+        console.log('初始化失败', err);
+    });
+}
+
+function reserve(name, tel, datepicker, time, sitem, bio) {
+    if (name == '' || tel == '' || datepicker == '' || time == '' || sitem == '') {
+        alert('这些字段都是必填项！');
+        return;
+    }
+
+    var msg = "###";
+    msg = msg + name + "/";
+    msg = msg + tel + "/";
+    liff.sendMessages([
+        {
+            type: 'text',
+            text: msg
+        }
+    ]).then(function () {
+        window.alert("预定成功！");
+        liff.closeWindow();
+    }).catch(function (error) {
+        window.alert("发送消息出错: " + error);
+    });
+}
+
+$(document).ready(function () {
+    initializeLiff();
+
+    $('#btn_reserve').click(function (e) {
+        reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(), $('#bio').val());
+    });
 });
  </script>
 </body>
