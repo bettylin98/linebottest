@@ -74,22 +74,24 @@
 </div>
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 <script>
-function initializeApp(data) {
-        var userid = data.context.userId;  //取得LINE Id
-    }
 
-var liffID = '2002173081-wgDRr6xy';
+  var liffID = '2002173081-wgDRr6xy';
+      function initializeLiff(liffID) {
+            liff
+                .init({
+                    liffId: liffID
+                })
+                .then(() => {
+                  　var isInClient = liff.isInClient();
+            　      console.log('isInClient', isInClient);
+            　      $('#isInClient').val(isInClient);
+                })
+                .catch((err) => {
+                  console.log('初始化失敗')
+                });
+        }
 
-liff.init({
-  liffId: liffID
-}).then(() => {
-　var isInClient = liff.isInClient();
-　console.log('isInClient', isInClient);
-　$('#isInClient').val(isInClient);
-}).catch((err) => {
-　console.log('初始化失敗')
-});
-
+            
    
    function reserve(name, tel, datepicker,time,sitem) {
          if (name == '' || tel == '' || datepicker =='' || time ==''|| sitem =='') {  //資料檢查
@@ -114,7 +116,7 @@ liff.init({
      }
  
      $(document).ready(function () {
-          initializeLiff(2002173081-wgDRr6xy);
+          initializeLiff();
         $('#btn_reserve').click(function (e) {  //按下確定鈕
             reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
      })
