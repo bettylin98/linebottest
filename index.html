@@ -78,9 +78,9 @@ var myLiffId = "2002173081-wgDRr6xy";
             liff.init({
                     liffId:myLiffId
                 }).then(() => {
-                  　var isInClient = liff.isInClient();
-            　      console.log('isInClient', isInClient);
-            　      $('#isInClient').val(isInClient);
+                  var isInClient = liff.isInClient();
+                  console.log('isInClient', isInClient);
+                  $('#isInClient').val(isInClient);
                 }).catch((err) => {
                   console.log('初始化失敗')
                 });
