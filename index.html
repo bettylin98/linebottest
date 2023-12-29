@@ -76,7 +76,7 @@
 var myLiffId = "2002173081-wgDRr6xy";
       function initializeLiff() {
             liff.init({
-                    liffId:"2002173081-wgDRr6xy"
+                    liffId:myLiffId
                 }).then(() => {
                   var isInClient = liff.isInClient();
                   console.log('isInClient', isInClient);
@@ -111,7 +111,7 @@ var myLiffId = "2002173081-wgDRr6xy";
      }
  
      $(document).ready(function () {
-          initializeLiff("2002173081-wgDRr6xy");
+          initializeLiff(2002173081-wgDRr6xy);
         $('#btn_reserve').click(function (e) {  //按下確定鈕
             reserve($('#name').val(), $('#tel').val(), $('#datepicker').val(), $('#time').val(), $('#sitem').val(),$('#bio').val());
      })
